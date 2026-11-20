@@ -3,8 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="referrer" content="no-referrer">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net/npm/pyodide@0.26.4/ blob: 'unsafe-eval' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; connect-src https://cdn.jsdelivr.net/npm/pyodide@0.26.4/; worker-src 'self' blob:; img-src 'self' data:; object-src 'none'; base-uri 'none'; form-action 'self'">
 <title>CodeDojo Daily</title>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="codedojo-daily.css">
@@ -12,7 +10,7 @@
 <body>
 <div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
 
-<!-- PAGE 1: DEMO SESSION -->
+<!-- PAGE 1: SIGN UP / SIGN IN -->
 <section id="signup" class="page">
   <div class="auth">
     <div class="intro">
@@ -20,23 +18,19 @@
       <h1>Train daily.<br>Win as a squad.</h1>
       <p class="quote muted" id="q1"></p>
       <p class="muted" style="margin-top:14px">Solve one problem a day, keep your streak, and climb from white belt to black belt with your squad.</p>
-      <div class="auth-features" aria-label="App features">
-        <span><b>12</b> coding challenges</span>
-        <span><b>7</b> achievement belts</span>
-        <span><b>4</b> squad members</span>
-      </div>
     </div>
     <div class="card glass">
-      <div class="auth-brand" aria-hidden="true">🥋</div>
-      <span class="auth-eyebrow">WELCOME TO THE DOJO</span>
-      <h2>Start your daily streak</h2>
-      <p class="muted" id="authSub">Enter your email to start a demo session. No account or password is required, and no server is contacted.</p>
+      <h2 style="font-size:1.8rem;font-weight:800">CodeDojo Daily</h2>
+      <p class="muted" id="authSub">Welcome back. Your streak is waiting.</p>
+      <div class="tabs" id="tabs" role="tablist"><button type="button" role="tab" data-m="in" aria-selected="true">Sign in</button><button type="button" role="tab" data-m="up" aria-selected="false">Sign up</button></div>
       <form id="auth" novalidate>
-        <div class="field"><label for="email">Email address</label><input id="email" type="email" placeholder="you@example.com" autocomplete="email" maxlength="254" required></div>
-        <div class="field"><label for="fname">Display name <span class="muted">(optional)</span></label><input id="fname" type="text" placeholder="What should we call you?" autocomplete="nickname" maxlength="20"></div>
+        <div class="field" id="nameRow" hidden><label for="fname">Full name</label><input id="fname" type="text" placeholder="Aarav Sharma" autocomplete="name"></div>
+        <div class="field"><label for="email">College email</label><input id="email" type="email" placeholder="you@college.edu" autocomplete="email"></div>
+        <div class="field"><label for="pw">Password</label><div class="pwrap"><input id="pw" type="password" placeholder="At least 6 characters" autocomplete="current-password" style="padding-right:64px"><button type="button" id="showPw">Show</button></div></div>
         <p class="err" id="err" role="alert" hidden></p>
-        <button class="btn primary" id="go" style="width:100%;padding:12px" type="submit">Continue as demo</button>
+        <button class="btn primary" id="go" style="width:100%;padding:12px" type="submit">Sign in</button>
       </form>
+      <button class="link" id="demo" type="button">Try the demo without an account</button>
     </div>
   </div>
 </section>
@@ -64,9 +58,9 @@
         <div class="card" id="problemPane"><p class="muted">Pick a problem from Daily or Problems to start coding.</p></div>
         <div class="card">
           <div class="toolbar"><select id="langSelect"><option value="javascript">JavaScript</option><option value="python">Python</option></select>
-            <button id="resetBtn" class="btn ghost" type="button">Reset</button><span class="sp"></span><button id="runBtn" class="btn" type="button">Run tests</button><button id="submitBtn" class="btn primary" type="button">Submit solution</button></div>
+            <button id="resetBtn" class="btn ghost">Reset</button><span class="sp"></span><button id="runBtn" class="btn">Run tests</button><button id="submitBtn" class="btn primary">Submit</button></div>
           <textarea id="code" spellcheck="false" aria-label="Code editor"></textarea>
-          <div id="results" aria-live="polite" aria-atomic="true"></div>
+          <div id="results"></div>
           <section class="coach" aria-labelledby="coachTitle">
             <div class="row"><h3 id="coachTitle">✨ AI Coach</h3><span class="chip">Local guidance</span></div>
             <p class="muted">Uses curated problem notes and your test results. Your code stays in this browser; no AI service is contacted.</p>
@@ -117,8 +111,6 @@
 </section>
 <div id="toast" role="status"></div>
 
-<script src="codedojo-data.js" defer></script>
-<script src="codedojo-storage.js" defer></script>
 <script src="codedojo-daily.js" defer></script>
 </body>
 </html>
