@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CodeDojo Daily</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="codedojo-daily.css">
+</head>
+<body>
+<div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div>
+
+<!-- PAGE 1: SIGN UP / SIGN IN -->
+<section id="signup" class="page">
+  <div class="auth">
+    <div class="intro">
+      <div class="chain" id="chain" aria-hidden="true"></div>
+      <h1>Train daily.<br>Win as a squad.</h1>
+      <p class="quote muted" id="q1"></p>
+      <p class="muted" style="margin-top:14px">Solve one problem a day, keep your streak, and climb from white belt to black belt with your squad.</p>
+    </div>
+    <div class="card glass">
+      <h2 style="font-size:1.8rem;font-weight:800">CodeDojo Daily</h2>
+      <p class="muted" id="authSub">Welcome back. Your streak is waiting.</p>
+      <div class="tabs" id="tabs" role="tablist"><button type="button" role="tab" data-m="in" aria-selected="true">Sign in</button><button type="button" role="tab" data-m="up" aria-selected="false">Sign up</button></div>
+      <form id="auth" novalidate>
+        <div class="field" id="nameRow" hidden><label for="fname">Full name</label><input id="fname" type="text" placeholder="Aarav Sharma" autocomplete="name"></div>
+        <div class="field"><label for="email">College email</label><input id="email" type="email" placeholder="you@college.edu" autocomplete="email"></div>
+        <div class="field"><label for="pw">Password</label><div class="pwrap"><input id="pw" type="password" placeholder="At least 6 characters" autocomplete="current-password" style="padding-right:64px"><button type="button" id="showPw">Show</button></div></div>
+        <p class="err" id="err" role="alert" hidden></p>
+        <button class="btn primary" id="go" style="width:100%;padding:12px" type="submit">Sign in</button>
+      </form>
+      <button class="link" id="demo" type="button">Try the demo without an account</button>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: HOME -->
+<section id="home" class="page">
+  <header class="top">
+    <div class="brand">🥋 CodeDojo <b>Daily</b></div>
+    <nav id="nav" aria-label="Primary navigation">
+      <button type="button" data-view="daily" class="active" aria-current="page">Daily</button><button type="button" data-view="problems">Problems</button><button type="button" data-view="workspace">Workspace</button><button type="button" data-view="teams">Teams</button><button type="button" data-view="leaderboard">Leaderboard</button><button type="button" data-view="profile">Profile</button><button type="button" data-view="about">About</button>
+    </nav>
+    <div class="chip"><span id="cName"></span> · <span class="dot" id="cDot"></span> <span id="cBelt"></span> · 🔥 <span id="cStreak">0</span> · ⭐ <span id="cScore">0</span></div>
+    <button class="btn ghost" id="theme" aria-label="Switch light or dark theme">◐</button>
+    <button class="btn ghost" id="logout">Log out</button>
+  </header>
+  <main>
+    <section id="view-daily" class="view active"></section>
+    <section id="view-problems" class="view">
+      <div class="filters"><input id="searchInput" type="text" placeholder="Search problems"><select id="tagFilter"></select>
+        <select id="diffFilter"><option value="">All difficulties</option><option>Easy</option><option>Medium</option><option>Hard</option></select></div>
+      <div id="problemList" class="grid"></div>
+    </section>
+    <section id="view-workspace" class="view">
+      <div class="ws">
+        <div class="card" id="problemPane"><p class="muted">Pick a problem from Daily or Problems to start coding.</p></div>
+        <div class="card">
+          <div class="toolbar"><select id="langSelect"><option value="javascript">JavaScript</option><option value="python">Python</option></select>
+            <button id="resetBtn" class="btn ghost">Reset</button><span class="sp"></span><button id="runBtn" class="btn">Run tests</button><button id="submitBtn" class="btn primary">Submit</button></div>
+          <textarea id="code" spellcheck="false" aria-label="Code editor"></textarea>
+          <div id="results"></div>
+          <section class="coach" aria-labelledby="coachTitle">
+            <div class="row"><h3 id="coachTitle">✨ AI Coach</h3><span class="chip">Local guidance</span></div>
+            <p class="muted">Uses curated problem notes and your test results. Your code stays in this browser; no AI service is contacted.</p>
+            <div class="toolbar">
+              <button type="button" class="btn" id="coachExplain" disabled>Explain problem</button>
+              <button type="button" class="btn" id="coachHint" disabled>Give me a hint</button>
+              <button type="button" class="btn" id="coachReview" disabled>Review last run</button>
+            </div>
+            <p id="coachOutput" class="coach-output" aria-live="polite" aria-atomic="true">Choose a problem to start a coaching session.</p>
+          </section>
+        </div>
+      </div>
+    </section>
+    <section id="view-teams" class="view"></section>
+    <section id="view-leaderboard" class="view"></section>
+    <section id="view-profile" class="view"></section>
+    <section id="view-about" class="view">
+      <div class="card hero about-hero">
+        <span class="tag">ABOUT THE APP</span>
+        <h1>Small daily practice. Stronger coding habits.</h1>
+        <p class="st">CodeDojo Daily turns algorithm practice into a routine with bite-sized challenges, a personal progress tracker, and a little friendly competition.</p>
+      </div>
+      <div class="about-grid grid">
+        <article class="card">
+          <h2>🥋 Daily challenges</h2>
+          <p class="muted">Try a rotating coding problem, work through examples, and use public tests before submitting against the full test set.</p>
+        </article>
+        <article class="card">
+          <h2>💻 Practice your way</h2>
+          <p class="muted">Browse problems by topic and difficulty, then solve them in the workspace with JavaScript or Python.</p>
+        </article>
+        <article class="card">
+          <h2>📈 Track your progress</h2>
+          <p class="muted">Build a streak, earn points and belts, and review your solved problems and activity history on your profile.</p>
+        </article>
+        <article class="card">
+          <h2>🤝 Learn together</h2>
+          <p class="muted">Create or join a demo squad and follow its score on the leaderboard while you practice.</p>
+        </article>
+        <article class="card">
+          <h2>✨ Local AI Coach</h2>
+          <p class="muted">Get curated hints, a problem explanation, and feedback on test results. The coach is rule-based and does not send code to an AI service.</p>
+        </article>
+      </div>
+      <p class="about-note muted">CodeDojo Daily is a browser-based demo. Progress and drafts are stored in this browser; sign-in, squads, and leaderboard activity are not backed by shared online accounts or servers.</p>
+    </section>
+  </main>
+</section>
+<div id="toast" role="status"></div>
+
+<script src="codedojo-daily.js" defer></script>
+</body>
+</html>
